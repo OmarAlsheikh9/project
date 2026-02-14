@@ -1,17 +1,16 @@
 *{
   font-family: Arial;
-  box-sizing: border-box;
+  box-sizing:border-box;
   margin: 0px;
 }
 .container{
-  background-color: bisque;
   margin: 0 auto;
   margin-top: 20px;
   width: fit-content;
 }
 .left-section{
   float: left;
-  font-size: 25px;
+  font-size: 15px;
 }
 .right-section{
   float: right;
@@ -21,7 +20,7 @@
   padding: 5px 5px;
 }
 .right-section input ,span{
-  font-size: 25px;
+  font-size: 15px;
 }
 .clear-float{
   clear: both;
@@ -29,33 +28,39 @@
 .left-section select{
   padding: 5px 7px;
   text-align: center;
-  font-size: 25px;
+  font-size: 15px;
   margin-right: 5px;
 }
-.left-section option{
-  text-align: center;
-}
+
 /* table */
 .table-section{
   margin-top: 13px;
 }
 table{
-  font-size: 25px;
+  font-size: 17px;
 }
-
 .table-section table th,td{
   text-align: left;
-  padding: 10px 2px;
-  padding-right: 90px;
+  padding: 5px 2px;
 }
-.table-section th{
+/* table header */
+thead th{
   cursor: pointer;
+  width: 105px;
 }
-.table-section th:hover{
+thead th:hover{
   background-color: white;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-
+  box-shadow: 1px 2px 0.5px rgba(0, 0, 0, 0.3);
 }
+.buttonContainer{
+  font-size: 10px;
+  color: lightgray;
+  float: right;
+}
+.active{
+  color: black;
+}
+/* table body */
 .white-row{
   background-color: white;
 }
@@ -65,9 +70,9 @@ table{
 .editButton,.deleteButton{
   color: white;
   background-color: blueviolet;
-  padding: 5px 10px;
+  padding: 5px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 15px;
 }

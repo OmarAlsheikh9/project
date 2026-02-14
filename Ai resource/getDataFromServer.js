@@ -9,10 +9,10 @@ export async function getDataFromServer(url) {
   // get data
   let data;
   try{
-    let response = await fetch(url);
-    data = await response.json();
-    return data;
-  }catch(error){
-    console.error(`Failed to fetch data Error > ${error}`);
+    let responseAsString = await fetch(url);
+    data = await responseAsString.json();
+  }catch{
+    console.log(error);
   }
+  return data;
 }

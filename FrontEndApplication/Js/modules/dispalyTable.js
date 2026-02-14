@@ -1,42 +1,42 @@
-export function dispalyTable(data, start = 1, size = 10) {
-  // 1.vaildation for input data
-  if (
-    !Array.isArray(data) ||
-    !isNumberBiggerZero(start) ||
-    !isNumberBiggerZero(size)
-  )
-    throw new Error(
-      "1.Data must be array\n2.start should be number bigger than or equal zero\n3.size must be number bigger than zero",
-    );
-  // 2.make table to show it in page
-  // first header for table for first name and meta data for each object
-  let headerTable = Object.keys(data[0]);
-  let tableHtml = `<tr>`;
-  headerTable.forEach((element) => {
-    tableHtml += `<th>${element}</th>`;
+export function makeHeaderTable(headers) {
+  let headerTable = `<thead><tr>`;
+  headers.forEach((element) => {
+    headerTable += `<th class="${element}">
+    <span>${element}</span>
+    <div class="buttonContainer">
+      <div class="upBtn">&#9650;</div>
+      <div class="downBtn">&#9660;</div>
+      <div class="clear-float"></div>
+    </div>
+    </th>`;
   });
   // insert edit and delete buttons in header of table
-  tableHtml += `<th>Edit</th><th>Delete</th>`;
-  tableHtml += `</tr>`;
-  // second rows of data
+  headerTable += `<th class="edit">Edit</th><th class="delete">Delete</th>`;
+  headerTable += `</tr></thead><tbody></tbody>`;
+  document.querySelector("table").innerHTML=headerTable; 
+  document.querySelector(`thead .${headers[0]} .upBtn`).classList.add('active');
+}
+export function updateTableContent(data,start=1,size=10){
+  let tableHtml='';
   start--; // decrease start one because array zero-index
   let firstColor = "white-row",
     secondColor = "gray-row";
   for (let i = start, loop = 1; i < size && i < data.length; i++, loop++) {
     let element = data[i];
     tableHtml += `<tr class=${loop % 2 ? firstColor : secondColor}>`;
-    headerTable.forEach((key) => {
-      tableHtml += `<td>${element[key]}</td>`;
-    });
+    for(const key in element)
+      tableHtml += `<td>${Array.isArray(element[key])?makeList(element[key]):element[key]}</td>`;
     // insert edit and delete buttons in each row in table
     tableHtml += `<td><button class="editButton">Edit</button></td>
     <td><button class="deleteButton">Delete</button></td>
     `;
     tableHtml += `</tr>`;
-  }
-  // update table page
-  document.querySelector(".table-section table").innerHTML = tableHtml;
+  }  // update table page
+  document.querySelector("table tbody").innerHTML=tableHtml;
 }
 function isNumberBiggerZero(input) {
   return typeof input === "number" && input > 0;
+}
+function makeList(array){
+  
 }

@@ -175,7 +175,7 @@
       "firstName": "Rutledge",
       "lastName": "Vauter",
       "email": "rvauterh@histats.com",
-      "gender": "Agender",
+      "gender": "male",
       "phone": "4192363853",
       "birthday": "01/07/1990",
       "coursesId": [5, 2]
@@ -255,7 +255,7 @@
       "firstName": "Obadias",
       "lastName": "O'Neill",
       "email": "ooneillp@goodreads.com",
-      "gender": "Genderqueer",
+      "gender": "male",
       "phone": "1302215427",
       "birthday": "08/08/1975",
       "coursesId": [5]
@@ -285,7 +285,7 @@
       "firstName": "Trescha",
       "lastName": "Marrow",
       "email": "tmarrows@over-blog.com",
-      "gender": "Non-binary",
+      "gender": "male",
       "phone": "3296091936",
       "birthday": "05/02/1977",
       "coursesId": [3, 5]
@@ -295,7 +295,7 @@
       "firstName": "Joli",
       "lastName": "McGreil",
       "email": "jmcgreilt@feedburner.com",
-      "gender": "Genderfluid",
+      "gender": "male",
       "phone": "5899682314",
       "birthday": "05/03/1985",
       "coursesId": [3]
@@ -305,7 +305,7 @@
       "firstName": "Neall",
       "lastName": "Cleere",
       "email": "ncleereu@ustream.tv",
-      "gender": "Genderfluid",
+      "gender": "male",
       "phone": "9253946181",
       "birthday": "03/03/2016",
       "coursesId": [2]
@@ -425,7 +425,7 @@
       "firstName": "Valeda",
       "lastName": "Falconar",
       "email": "vfalconar16@bravesites.com",
-      "gender": "Non-binary",
+      "gender": "male",
       "phone": "9264996596",
       "birthday": "10/03/1998",
       "coursesId": [5, 3, 2, 4]
@@ -455,7 +455,7 @@
       "firstName": "Rickey",
       "lastName": "Roberto",
       "email": "rroberto19@macromedia.com",
-      "gender": "Non-binary",
+      "gender": "male",
       "phone": "8419647106",
       "birthday": "29/06/2009",
       "coursesId": [2, 5]
@@ -632,7 +632,7 @@
       "email": "sheape0@posterous.com",
       "salary": "£5018.95",
       "phone": "8396151783",
-      "birthDate": "06-01-1995",
+      "birthDate": "06/01/1995",
       "role": "instructor"
     },
     {
@@ -642,7 +642,7 @@
       "email": "aheatley1@feedburner.com",
       "salary": "£9665.94",
       "phone": "7707603654",
-      "birthDate": "09-08-1980",
+      "birthDate": "09/08/1980",
       "role": "instructor"
     },
     {
@@ -652,7 +652,7 @@
       "email": "lmacardle2@1688.com",
       "salary": "£5063.24",
       "phone": "3382162315",
-      "birthDate": "10-08-1973",
+      "birthDate": "10/08/1973",
       "role": "instructor"
     },
     {
@@ -662,7 +662,7 @@
       "email": "lrohlf3@bloglines.com",
       "salary": "£4124.59",
       "phone": "5994324679",
-      "birthDate": "19-06-2006",
+      "birthDate": "19/06/2006",
       "role": "instructor"
     },
     {
@@ -672,7 +672,7 @@
       "email": "ibarlthrop4@bluehost.com",
       "salary": "£2930.01",
       "phone": "6583370467",
-      "birthDate": "13-02-1990",
+      "birthDate": "13/02/1990",
       "role": "instructor"
     },
     {
@@ -682,7 +682,7 @@
       "email": "bbonefant5@loc.gov",
       "salary": "£2877.34",
       "phone": "9435138088",
-      "birthDate": "02-05-1992",
+      "birthDate": "02/05/1992",
       "role": "instructor"
     },
     {
@@ -692,7 +692,7 @@
       "email": "jshutler6@mlb.com",
       "salary": "£5389.77",
       "phone": "2347781525",
-      "birthDate": "28-04-1997",
+      "birthDate": "28/04/1997",
       "role": "instructor"
     },
     {
@@ -702,7 +702,7 @@
       "email": "fmunden7@wix.com",
       "salary": "£6410.19",
       "phone": "3668646770",
-      "birthDate": "10-08-1977",
+      "birthDate": "10/08/1977",
       "role": "instructor"
     },
     {
@@ -712,7 +712,7 @@
       "email": "csaffell8@reddit.com",
       "salary": "£4229.43",
       "phone": "2861360303",
-      "birthDate": "21-06-1984",
+      "birthDate": "21/06/1984",
       "role": "instructor"
     },
     {
@@ -722,7 +722,7 @@
       "email": "pambroisin9@ehow.com",
       "salary": "£3186.56",
       "phone": "9704785151",
-      "birthDate": "07-06-2010",
+      "birthDate": "07/06/2010",
       "role": "instructor"
     },
     {
@@ -732,7 +732,7 @@
       "email": "gwerndleya@privacy.gov.au",
       "salary": "£6064.69",
       "phone": "3043251249",
-      "birthDate": "19-11-2011",
+      "birthDate": "19/11/2011",
       "role": "instructor"
     },
     {
@@ -742,7 +742,7 @@
       "email": "ksmidmorb@amazon.co.uk",
       "salary": "£2728.24",
       "phone": "3635991541",
-      "birthDate": "05-01-2004",
+      "birthDate": "05/01/2004",
       "role": "instructor"
     },
     {
@@ -752,7 +752,7 @@
       "email": "vswync@storify.com",
       "salary": "£1253.61",
       "phone": "5442524693",
-      "birthDate": "24-11-2004",
+      "birthDate": "24/11/2004",
       "role": "instructor"
     },
     {
@@ -762,7 +762,7 @@
       "email": "elehrahand@4shared.com",
       "salary": "£8333.92",
       "phone": "6684121080",
-      "birthDate": "16-04-2014",
+      "birthDate": "16/04/2014",
       "role": "instructor"
     },
     {
@@ -772,7 +772,7 @@
       "email": "jloachee@boston.com",
       "salary": "£2921.23",
       "phone": "3484374645",
-      "birthDate": "13-07-2009",
+      "birthDate": "13/07/2009",
       "role": "instructor"
     },
     {
@@ -782,7 +782,7 @@
       "email": "acasself@dell.com",
       "salary": "£8313.71",
       "phone": "2648455546",
-      "birthDate": "29-12-1970",
+      "birthDate": "29/12/1970",
       "role": "instructor"
     },
     {
@@ -792,7 +792,7 @@
       "email": "cgreedyerg@earthlink.net",
       "salary": "£2782.85",
       "phone": "9415824053",
-      "birthDate": "24-09-2000",
+      "birthDate": "24/09/2000",
       "role": "instructor"
     },
     {
@@ -802,7 +802,7 @@
       "email": "cmackeegh@google.com.br",
       "salary": "£4266.42",
       "phone": "7082076802",
-      "birthDate": "13-09-1994",
+      "birthDate": "13/09/1994",
       "role": "instructor"
     },
     {
@@ -812,7 +812,7 @@
       "email": "ewhitcombei@hc360.com",
       "salary": "£1636.12",
       "phone": "1239723117",
-      "birthDate": "13-06-1975",
+      "birthDate": "13/06/1975",
       "role": "instructor"
     },
     {
@@ -822,7 +822,7 @@
       "email": "dvedenyapinj@quantcast.com",
       "salary": "£7059.73",
       "phone": "6668405383",
-      "birthDate": "31-10-1978",
+      "birthDate": "31/10/1978",
       "role": "instructor"
     },
     {
@@ -832,7 +832,7 @@
       "email": "bphidgink@prweb.com",
       "salary": "£6415.10",
       "phone": "9993228026",
-      "birthDate": "17-06-2002",
+      "birthDate": "17/06/2002",
       "role": "employee"
     },
     {
@@ -842,7 +842,7 @@
       "email": "mschruursl@deviantart.com",
       "salary": "£3087.77",
       "phone": "2575897352",
-      "birthDate": "27-07-1982",
+      "birthDate": "27/07/1982",
       "role": "employee"
     },
     {
@@ -852,7 +852,7 @@
       "email": "rtowndrowm@salon.com",
       "salary": "£8476.80",
       "phone": "4959045327",
-      "birthDate": "28-06-2002",
+      "birthDate": "28/06/2002",
       "role": "employee"
     },
     {
@@ -862,7 +862,7 @@
       "email": "vbedhamn@thetimes.co.uk",
       "salary": "£9783.49",
       "phone": "9732422964",
-      "birthDate": "05-09-2003",
+      "birthDate": "05/09/2003",
       "role": "employee"
     },
     {
@@ -872,7 +872,7 @@
       "email": "gleadbeatero@hhs.gov",
       "salary": "£4486.92",
       "phone": "4598646848",
-      "birthDate": "07-08-2014",
+      "birthDate": "07/08/2014",
       "role": "employee"
     },
     {
@@ -882,7 +882,7 @@
       "email": "lkeemarp@dion.ne.jp",
       "salary": "£1626.40",
       "phone": "2101197554",
-      "birthDate": "12-03-2000",
+      "birthDate": "12/03/2000",
       "role": "employee"
     },
     {
@@ -892,7 +892,7 @@
       "email": "epoulstonq@foxnews.com",
       "salary": "£3465.16",
       "phone": "6919226249",
-      "birthDate": "11-09-1979",
+      "birthDate": "11/09/1979",
       "role": "employee"
     },
     {
@@ -902,7 +902,7 @@
       "email": "mgiraldor@psu.edu",
       "salary": "£7241.88",
       "phone": "3389754554",
-      "birthDate": "17-11-2010",
+      "birthDate": "17/11/2010",
       "role": "employee"
     },
     {
@@ -912,7 +912,7 @@
       "email": "twileys@wsj.com",
       "salary": "£4875.67",
       "phone": "1598006664",
-      "birthDate": "09-12-1985",
+      "birthDate": "09/12/1985",
       "role": "employee"
     },
     {
@@ -922,7 +922,7 @@
       "email": "ekoomart@surveymonkey.com",
       "salary": "£4426.36",
       "phone": "3642495475",
-      "birthDate": "24-01-1999",
+      "birthDate": "24/01/1999",
       "role": "employee"
     }
   ]
