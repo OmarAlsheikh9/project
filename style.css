@@ -1,0 +1,46 @@
+*{
+  font-family: Arial;
+  box-sizing: border-box;
+  margin: 0px;
+}
+.container{
+  background-color: bisque;
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 1300px;
+}
+.left-section{
+  float: left;
+}
+.right-section{
+  float: right;
+  margin-top: 5px;
+}
+.clear-float{
+  clear: both;
+}
+.left-section select{
+  padding: 5px 7px;
+  text-align: center;
+}
+.left-section option{
+  text-align: center;
+}
+/* table */
+.table-section{
+  margin-top: 10px;
+}
+
+.table-section table th,td{
+  text-align: left;
+  padding: 5px 2px;
+  padding-right: 110px;
+}
+.table-section th{
+  cursor: pointer;
+}
+.table-section th:hover{
+  background-color: white;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+
+}
