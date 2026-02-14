@@ -7,14 +7,21 @@
   background-color: bisque;
   margin: 0 auto;
   margin-top: 20px;
-  width: 1300px;
+  width: fit-content;
 }
 .left-section{
   float: left;
+  font-size: 25px;
 }
 .right-section{
   float: right;
   margin-top: 5px;
+}
+.right-section input{
+  padding: 5px 5px;
+}
+.right-section input ,span{
+  font-size: 25px;
 }
 .clear-float{
   clear: both;
@@ -22,19 +29,24 @@
 .left-section select{
   padding: 5px 7px;
   text-align: center;
+  font-size: 25px;
+  margin-right: 5px;
 }
 .left-section option{
   text-align: center;
 }
 /* table */
 .table-section{
-  margin-top: 10px;
+  margin-top: 13px;
+}
+table{
+  font-size: 25px;
 }
 
 .table-section table th,td{
   text-align: left;
-  padding: 5px 2px;
-  padding-right: 110px;
+  padding: 10px 2px;
+  padding-right: 90px;
 }
 .table-section th{
   cursor: pointer;
@@ -43,4 +55,19 @@
   background-color: white;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 
+}
+.white-row{
+  background-color: white;
+}
+.gray-row{
+  background-color: lightgray;
+}
+.editButton,.deleteButton{
+  color: white;
+  background-color: blueviolet;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
 }
