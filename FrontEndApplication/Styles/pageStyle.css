@@ -76,3 +76,8 @@ thead th:hover{
   cursor: pointer;
   font-size: 15px;
 }
+/* droplist */
+.dropList{
+  width: 80px;
+  font-size: 18px;
+}

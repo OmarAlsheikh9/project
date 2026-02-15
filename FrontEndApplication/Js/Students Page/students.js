@@ -17,7 +17,7 @@ let sizePerPage = 10,
 
 // start point
 makeHeaderTable(keysofStudents);
-updateTableContent(studentsData, startStudents, sizePerPage);
+updateTableContent(studentsData, startStudents, sizePerPage,coursesData);
 // events handler
 // 1.size of students
 document

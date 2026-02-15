@@ -16,7 +16,7 @@ export function makeHeaderTable(headers) {
   document.querySelector("table").innerHTML=headerTable; 
   document.querySelector(`thead .${headers[0]} .upBtn`).classList.add('active');
 }
-export function updateTableContent(data,start=1,size=10){
+export function updateTableContent(data,start=1,size=10,relatedObject){
   let tableHtml='';
   start--; // decrease start one because array zero-index
   let firstColor = "white-row",
@@ -25,7 +25,7 @@ export function updateTableContent(data,start=1,size=10){
     let element = data[i];
     tableHtml += `<tr class=${loop % 2 ? firstColor : secondColor}>`;
     for(const key in element)
-      tableHtml += `<td>${Array.isArray(element[key])?makeList(element[key]):element[key]}</td>`;
+      tableHtml += `<td>${Array.isArray(element[key])?makeList(element[key],relatedObject):element[key]}</td>`;
     // insert edit and delete buttons in each row in table
     tableHtml += `<td><button class="editButton">Edit</button></td>
     <td><button class="deleteButton">Delete</button></td>
@@ -34,9 +34,14 @@ export function updateTableContent(data,start=1,size=10){
   }  // update table page
   document.querySelector("table tbody").innerHTML=tableHtml;
 }
-function isNumberBiggerZero(input) {
-  return typeof input === "number" && input > 0;
-}
-function makeList(array){
-  
+
+function makeList(array,relatedObject){
+  let result='<select class="dropList">';
+  array.forEach(element=>{
+    let target = relatedObject.find(item=>item.id===element);
+    if(target)
+      result+=`<option>${target.courseName}</option>`;
+  })
+  result+=`</select>`;
+  return result;
 }
