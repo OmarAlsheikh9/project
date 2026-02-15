@@ -16,14 +16,13 @@ export function makeHeaderTable(headers) {
   document.querySelector("table").innerHTML=headerTable; 
   document.querySelector(`thead .${headers[0]} .upBtn`).classList.add('active');
 }
-export function updateTableContent(data,start=1,size=10,relatedObject){
+export function updateTableContent(data,relatedObject){
   let tableHtml='';
-  start--; // decrease start one because array zero-index
   let firstColor = "white-row",
     secondColor = "gray-row";
-  for (let i = start, loop = 1; i < size && i < data.length; i++, loop++) {
+  for (let i = 0; i < data.length; i++) {
     let element = data[i];
-    tableHtml += `<tr class=${loop % 2 ? firstColor : secondColor}>`;
+    tableHtml += `<tr class=${i % 2 ? firstColor : secondColor}>`;
     for(const key in element)
       tableHtml += `<td>${Array.isArray(element[key])?makeList(element[key],relatedObject):element[key]}</td>`;
     // insert edit and delete buttons in each row in table

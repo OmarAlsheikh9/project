@@ -16,3 +16,9 @@ export async function getDataFromServer(url) {
     console.error(`Failed to fetch data Error > ${error}`);
   }
 }
+export function getCurrentData(data,start,end) {
+  let result=[];
+  for(let i=start-1;i<data.length&&i<end;i++)
+    result.push(data[i]);
+  return result;
+}

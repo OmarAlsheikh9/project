@@ -81,3 +81,33 @@ thead th:hover{
   width: 80px;
   font-size: 18px;
 }
+/* page control */
+.pageControl{
+  margin-top: 20px;
+}
+/* message */
+.message{
+  color: gray;
+  font-size: 18px;
+  float: left;
+}
+/* paginationContainer */
+.paginationContainer{
+  float: right;
+}
+.paginationContainer div{
+  float: left;
+  border: 1px solid gray;
+  padding: 5px 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  color: blue;
+}
+.paginationContainer .firstPage ,.paginationContainer .perviosPage{
+  background-color: lightgray;
+  color: black;
+}
+.paginationContainer .activePage{
+  color: white;
+  background-color: skyblue;
+}

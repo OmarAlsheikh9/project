@@ -1,5 +1,5 @@
 // import all functions that students need
-import { getDataFromServer } from "../modules/getDataFromServer.js";
+import { getDataFromServer,getCurrentData } from "../modules/getDataFromServer.js";
 import {
   makeHeaderTable,
   updateTableContent
@@ -10,27 +10,36 @@ const studentsURL = "http://localhost:3000/students",
 const studentsData = await getDataFromServer(studentsURL);
 const coursesData = await getDataFromServer(coursesURL);
 let sizePerPage = 10,
-  startStudents = 1,
+  currentStartStudents = 1,
+  currentEndStudents=currentStartStudents+sizePerPage-1,
   keysofStudents = Object.keys(studentsData[0]),
   pagesortedBy = keysofStudents[0],
-  typeofSort = "asc";
-
+  typeofSort = "asc",
+  currentStudents = getCurrentData(studentsData,currentStartStudents,currentEndStudents),
+  currentPage=1;
 // start point
 makeHeaderTable(keysofStudents);
-updateTableContent(studentsData, startStudents, sizePerPage,coursesData);
+updateTableContent(currentStudents,coursesData);
+updateMessage();
+updatepagination();
 // events handler
 // 1.size of students
 document
   .querySelector(".left-section select")
   .addEventListener("change", () => {
     sizePerPage = Number(document.querySelector(".left-section select").value);
-    updateTableContent(studentsData, startStudents, sizePerPage);
+    currentEndStudents=currentStartStudents+sizePerPage-1;
+    currentStudents = getCurrentData(studentsData,currentStartStudents,currentEndStudents);
+    updateTableContent(currentStudents,coursesData);
+    updateMessage();
+    // update paging
+    updatepagination();
   });
 
 // 2. sort based on header
 document.querySelector("thead").addEventListener("click", (event) => {
-  const selectedTh = event.target.closest("th").classList.value;
-  if (selectedTh !== "edit" && selectedTh !== "delete") {
+  const selectedTh = event.target.closest("th").classList[0];
+  if (selectedTh !== "edit" && selectedTh !== "delete"&&selectedTh!=="courses") {
     // We will change page by sort 
     // 1. change active button 
     if (selectedTh === pagesortedBy) {
@@ -57,16 +66,15 @@ document.querySelector("thead").addEventListener("click", (event) => {
     }
     // 2. edit data
     // first selected type of data we want to sort 
-    const typeDataSort= typeof studentsData[0][pagesortedBy];
+    const typeDataSort= typeof currentStudents[0][pagesortedBy];
     if(typeDataSort==='number')
-      sortArrayOfObjectsByNumbers(studentsData,pagesortedBy,typeofSort);
+      sortArrayOfObjectsByNumbers(currentStudents,pagesortedBy,typeofSort);
     else if(typeDataSort==='string'&&pagesortedBy!=='birthday')
-      sortArrayOfObjectsByStrings(studentsData,pagesortedBy,typeofSort);
+      sortArrayOfObjectsByStrings(currentStudents,pagesortedBy,typeofSort);
     else if(pagesortedBy === 'birthday')
-      sortArrayOfObjectsByDate(studentsData,pagesortedBy,typeofSort);
+      sortArrayOfObjectsByDate(currentStudents,pagesortedBy,typeofSort);
     // 3. update table content
-    updateTableContent(studentsData,startStudents,sizePerPage);
-    console.log(pagesortedBy);
+    updateTableContent(currentStudents,coursesData);
   }
 });
 function sortArrayOfObjectsByNumbers(myObject,propertyName,type){
@@ -92,3 +100,29 @@ function sortArrayOfObjectsByDate(myObject,propertyName,type){
       return date2 - date1;
     });
 }
+function updateMessage(){
+  document.querySelector(".message").textContent=`Showing ${currentStartStudents} to ${currentEndStudents} of ${studentsData.length} entries`;
+}
+function updatepagination(){
+  let result=`
+  <div class="firstPage"><<</div>
+  <div class="perviosPage"><</div>
+  `;
+
+  for(let totalElements=studentsData.length,page=1;totalElements>0;page++,totalElements-=sizePerPage){
+    result+=`<div class='page${page}'>${page}</div>`;
+  }
+  result+=`
+  <div class="lastPage">>></div>
+  <div class="nextPage">></div>
+  `;
+  document.querySelector(".paginationContainer").innerHTML=result;
+  document.querySelector(`.page${currentPage}`).classList.add("activePage");
+}
+// event for pagination
+document.querySelector(".paginationContainer").addEventListener("click",event=>{
+  // css
+  const previosPage=currentPage;
+  currentPage=Number(event.target.classList[0][4]);
+  console.log(previosPage,currentPage);
+})
