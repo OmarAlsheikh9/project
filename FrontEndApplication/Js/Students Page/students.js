@@ -19,7 +19,7 @@ let sizePerPage = 10,
   currentPage=1;
 // start point
 makeHeaderTable(keysofStudents);
-updateTableContent(currentStudents,coursesData);
+updateTableContent(currentStudents,coursesData,"students");
 updateMessage();
 updatepagination();
 // events handler
@@ -30,7 +30,7 @@ document
     sizePerPage = Number(document.querySelector(".left-section select").value);
     currentEndStudents=currentStartStudents+sizePerPage-1;
     currentStudents = getCurrentData(studentsData,currentStartStudents,currentEndStudents);
-    updateTableContent(currentStudents,coursesData);
+    updateTableContent(currentStudents,coursesData,"students");
     updateMessage();
     // update paging
     updatepagination();
@@ -66,15 +66,14 @@ document.querySelector("thead").addEventListener("click", (event) => {
     }
     // 2. edit data
     // first selected type of data we want to sort 
-    const typeDataSort= typeof currentStudents[0][pagesortedBy];
-    if(typeDataSort==='number')
+    if(pagesortedBy==='id' || pagesortedBy==='phone')
       sortArrayOfObjectsByNumbers(currentStudents,pagesortedBy,typeofSort);
-    else if(typeDataSort==='string'&&pagesortedBy!=='birthday')
-      sortArrayOfObjectsByStrings(currentStudents,pagesortedBy,typeofSort);
-    else if(pagesortedBy === 'birthday')
+    else if(pagesortedBy==='birthday')
       sortArrayOfObjectsByDate(currentStudents,pagesortedBy,typeofSort);
+    else
+      sortArrayOfObjectsByStrings(currentStudents,pagesortedBy,typeofSort);
     // 3. update table content
-    updateTableContent(currentStudents,coursesData);
+    updateTableContent(currentStudents,coursesData,"students");
   }
 });
 function sortArrayOfObjectsByNumbers(myObject,propertyName,type){
@@ -125,4 +124,9 @@ document.querySelector(".paginationContainer").addEventListener("click",event=>{
   const previosPage=currentPage;
   currentPage=Number(event.target.classList[0][4]);
   console.log(previosPage,currentPage);
+})
+
+
+document.querySelector(".add-std").addEventListener("click", (e)=>{
+  window.location.href = `../Html/manageStudents.html`;
 })
