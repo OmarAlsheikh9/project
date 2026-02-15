@@ -37,7 +37,7 @@ export function updateTableContent(data,relatedObject){
 function makeList(array,relatedObject){
   let result='<select class="dropList">';
   array.forEach(element=>{
-    let target = relatedObject.find(item=>item.id===element);
+    let target = relatedObject.find(item=>Number(item.id)===element);
     if(target)
       result+=`<option>${target.courseName}</option>`;
   })

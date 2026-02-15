@@ -121,7 +121,7 @@ function updatepagination(){
   document.querySelector(`.page${currentPage}`).classList.add("activePage");
 }
 function totalPages(){
-  return studentsData.length / sizePerPage;
+  return Math.ceil(studentsData.length / sizePerPage);
 }
 // event for pagination
 document.querySelector(".paginationContainer").addEventListener("click",event=>{
@@ -142,13 +142,13 @@ function getNewPage(pageName){
   // if user click on diffrent page we five option
   let value = new Map();
   // 1. click on first page
-  value['firstPage']=1; 
+  value.set('firstPage',1);
   // 2. click on last page
-  value['lastPage']=totalPages(); 
+  value.set('lastPage',totalPages());
   // 3. click on next page
-  value['nextPage']=currentPage!==totalPages()?currentPage+1:currentPage;
+  value.set('nextPage',currentPage!==totalPages()?currentPage+1:currentPage);
   // 4. click on prev page
-  value['perviousPage']=currentPage!==1?currentPage-1:currentPage;
+  value.set('perviousPage',currentPage!==1?currentPage-1:currentPage);
   return value[pageName] || Number(pageName.substring(pageName.lastIndexOf('e')+1));
   // 5. click on specific page then return number after e letter that represent number of page
 }
