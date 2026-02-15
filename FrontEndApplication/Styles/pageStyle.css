@@ -103,7 +103,7 @@ thead th:hover{
   cursor: pointer;
   color: blue;
 }
-.paginationContainer .firstPage ,.paginationContainer .perviosPage{
+.paginationContainer .firstPage ,.paginationContainer .lastPage{
   background-color: lightgray;
   color: black;
 }
