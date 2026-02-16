@@ -69,8 +69,6 @@ export function updateTableContent(currentData,relatedObject,mainObjectName){
       window.location.href = `../Html/manage${mainObjectName}.html?id=${id}`;
     });
   }
-
-
 }
 function makeList(array,relatedObject){
   let result='<select class="dropList">';
