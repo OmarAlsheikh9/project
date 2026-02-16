@@ -1,17 +1,19 @@
-// import all functions that students need
-import { getDataFromServer,getCurrentData } from "../modules/getDataFromServer.js";
-import {
-  makeHeaderTable,
-  updateTableContent
-} from "../modules/dispalyTable.js";
-// variables
-const studentsURL = "http://localhost:3000/students",
-  coursesURL = "http://localhost:3000/courses";
-const studentsData = await getDataFromServer(studentsURL);
-const coursesData = await getDataFromServer(coursesURL);
+// This Script split into two part (Start Point with inital vaules) + (Four event handler)
+// 1. Start Point 
+// 1.1 import all functions that students need
+import { getDataFromServer} from "../modules/getDataFromServer.js";
+import {makeHeaderTable,updateTableContent,sortTableContent} from "../modules/dispalyTable.js";
+import { updatepagination,getNewPage} from "../modules/pagination.js";
+import { updatePageAfterAnyChange } from "../modules/updatePage.js";
+// 1.2 variables with default values
+
+let studentsURL = "http://localhost:3000/students",coursesURL = "http://localhost:3000/courses",
+studentsData = await getDataFromServer(studentsURL),
+coursesData = await getDataFromServer(coursesURL);
+
 let sizePerPage = 10,
-  currentStartStudents = 1,
-  currentEndStudents=currentStartStudents+sizePerPage-1,
+  currentStartStudents = studentsData.length > 0 ? 1 : 0,
+  currentEndStudents = currentStartStudents + sizePerPage - 1,
   keysofStudents = Object.keys(studentsData[0]),
   pagesortedBy = keysofStudents[0],
   typeofSort = "asc",
@@ -35,13 +37,32 @@ document
     // update paging
     updatepagination();
   });
+  currentStudents='',
+  currentPage = 1;
+// 1.3 start point default page
+makeHeaderTable(keysofStudents,studentsData[0]);
+currentStudents=updatePageAfterAnyChange(currentStudents,studentsData,pagesortedBy,typeofSort,coursesData,currentStartStudents,currentEndStudents);
+updatepagination(studentsData,sizePerPage,currentPage);
+// 2. Four events handler (event for change size per page , event for sorting , event for changing current page , event for searching)
+// 2.1 Event for change size per page
+document.querySelector(".left-section select").addEventListener("change", () => {
+  // 1. if user change size per page Update sizePerPage
+  sizePerPage = Number(document.querySelector(".left-section select").value);
+  // 2. Update currentEndStudents because it will be changed but start still
+  currentEndStudents = currentStartStudents + sizePerPage - 1;
+  // 3. update page and current data
+  currentStudents = updatePageAfterAnyChange(currentStudents,studentsData,pagesortedBy,typeofSort,coursesData,currentStartStudents,currentEndStudents);
+  // 4. update pagination
+  updatepagination(studentsData,sizePerPage,currentPage);
+});
 
-// 2. sort based on header
+// 2.2 Event for sort based on clicking on header
 document.querySelector("thead").addEventListener("click", (event) => {
+  // 1. select which header we clicked
   const selectedTh = event.target.closest("th").classList[0];
-  if (selectedTh !== "edit" && selectedTh !== "delete"&&selectedTh!=="courses") {
-    // We will change page by sort 
-    // 1. change active button 
+  if (selectedTh !== "edit" &&selectedTh !== "delete" &&selectedTh !== "courses") {
+    // We will change page by sort +  change active button
+    // 1. if user click on same header we already sort by then reverse type of sort
     if (selectedTh === pagesortedBy) {
       typeofSort = typeofSort === "asc" ? "des" : "asc";
       // css style
@@ -52,17 +73,13 @@ document.querySelector("thead").addEventListener("click", (event) => {
         .querySelector(`thead .${pagesortedBy} .downBtn`)
         .classList.toggle("active");
     } else {
-      // remove active from current th
-      document
-        .querySelector(`thead .${pagesortedBy} .upBtn`)
-        .classList.remove("active");
-      document
-        .querySelector(`thead .${pagesortedBy} .downBtn`)
-        .classList.remove("active");
+      //2. if diffrent header remove active from current th then add to new one
+      document.querySelector(`thead .${pagesortedBy} .upBtn`).classList.remove("active");
+      document.querySelector(`thead .${pagesortedBy} .downBtn`).classList.remove("active");
       // add active to new one
-      document.querySelector(`thead .${selectedTh} .upBtn`).classList.add('active');
-      pagesortedBy=selectedTh;
-      typeofSort='asc';
+      document.querySelector(`thead .${selectedTh} .upBtn`).classList.add("active");
+      pagesortedBy = selectedTh;
+      typeofSort = "asc";
     }
     // 2. edit data
     // first selected type of data we want to sort 
@@ -74,48 +91,19 @@ document.querySelector("thead").addEventListener("click", (event) => {
       sortArrayOfObjectsByStrings(currentStudents,pagesortedBy,typeofSort);
     // 3. update table content
     updateTableContent(currentStudents,coursesData,"students");
+    // 2. sort data
+    sortTableContent(currentStudents,pagesortedBy,typeofSort);
+    // 3. update table content
+    updateTableContent(currentStudents, coursesData);
   }
 });
-function sortArrayOfObjectsByNumbers(myObject,propertyName,type){
-  if(type==='asc')
-    myObject.sort((a,b)=>a[propertyName]-b[propertyName]);
-  else
-    myObject.sort((a,b)=>b[`${propertyName}`]-a[`${propertyName}`]);
-}
-function sortArrayOfObjectsByStrings(myObject,propertyName,type){
-  if(type==='asc')
-    myObject.sort((a,b)=>a[propertyName].localeCompare(b[propertyName]));
-  else
-    myObject.sort((a,b)=>b[propertyName].localeCompare(a[propertyName]));
-}
-function sortArrayOfObjectsByDate(myObject,propertyName,type){
-    myObject.sort((a,b)=>{
-      const [day1,month1,year1] = a[propertyName].split('/').map(stringDate=>Number(stringDate));
-      const [day2,month2,year2] = b[propertyName].split('/').map(stringDate=>Number(stringDate));
-      const date1 = new Date(year1, month1 - 1, day1); 
-      const date2 = new Date(year2, month2 - 1, day2);
-      if(type==='asc')
-        return date1 - date2;
-      return date2 - date1;
-    });
-}
-function updateMessage(){
-  document.querySelector(".message").textContent=`Showing ${currentStartStudents} to ${currentEndStudents} of ${studentsData.length} entries`;
-}
-function updatepagination(){
-  let result=`
-  <div class="firstPage"><<</div>
-  <div class="perviosPage"><</div>
-  `;
 
-  for(let totalElements=studentsData.length,page=1;totalElements>0;page++,totalElements-=sizePerPage){
-    result+=`<div class='page${page}'>${page}</div>`;
-  }
-  result+=`
-  <div class="lastPage">>></div>
-  <div class="nextPage">></div>
-  `;
-  document.querySelector(".paginationContainer").innerHTML=result;
+// 2.3 Event for pagination
+document.querySelector(".paginationContainer").addEventListener("click", (event) => {
+  // 1. change css to make active new currentPage button and delete it from previous + select new currentPage
+  const previosPage = currentPage;
+  currentPage = getNewPage(event.target.classList[0],currentPage,studentsData,sizePerPage);
+  document.querySelector(`.page${previosPage}`).classList.remove("activePage");
   document.querySelector(`.page${currentPage}`).classList.add("activePage");
 }
 // event for pagination
@@ -130,3 +118,25 @@ document.querySelector(".paginationContainer").addEventListener("click",event=>{
 document.querySelector(".add-std").addEventListener("click", (e)=>{
   window.location.href = `../Html/manageStudents.html`;
 })
+  // 2. currentPage updated so we must updata page
+  currentStartStudents = (currentPage - 1) * sizePerPage + 1; // new start
+  currentEndStudents = currentStartStudents + sizePerPage - 1; // new end
+  updatePageAfterAnyChange(currentStudents,studentsData,pagesortedBy,typeofSort,coursesData,currentStartStudents,currentEndStudents);
+});
+
+// 2.4 Event for search
+document.querySelector(".searchInput").addEventListener("keyup", async(event) => {
+  let searchInputValue = (event.target.value).trim().toLowerCase();
+  let typeSearch=document.querySelector('.typeSearch').value;
+  // get updated data
+  studentsData = await getDataFromServer(studentsURL);
+  // filter data
+  studentsData = studentsData.filter(element=>{
+    return element[typeSearch].toString().toLowerCase().includes(searchInputValue);
+  });
+  currentStartStudents= studentsData.length > 0 ? 1 : 0;
+  currentEndStudents=currentStartStudents + sizePerPage - 1;
+  currentStudents=updatePageAfterAnyChange(currentStudents,studentsData,pagesortedBy,typeofSort,coursesData,currentStartStudents,currentEndStudents);
+  updatepagination(studentsData,sizePerPage,currentPage);
+});
+// we should update studensData in every edit on db in add , edit , delete

@@ -31,9 +31,11 @@
   float: right;
   margin-top: 5px;
 }
-.right-section input{
-  padding: 5px 5px;
+.right-section input , .typeSearch{
+  padding: 5px 10px;
+  font-size: 16px;
 }
+
 .right-section input ,span{
   font-size: 15px;
 }
@@ -118,7 +120,7 @@ thead th:hover{
   cursor: pointer;
   color: blue;
 }
-.paginationContainer .firstPage ,.paginationContainer .perviosPage{
+.paginationContainer .firstPage ,.paginationContainer .lastPage{
   background-color: lightgray;
   color: black;
 }
