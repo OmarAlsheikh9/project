@@ -4,7 +4,7 @@
 
 // 1. Start Point 
 // 1.1 import all functions that students need
-import { getDataFromServer,getCurrentData} from "../modules/getDataFromServer.js";
+import { getDataFromServer} from "../modules/getDataFromServer.js";
 import {makeHeaderTable,updateTableContent,sortTableContent} from "../modules/dispalyTable.js";
 import { updatepagination,getNewPage} from "../modules/pagination.js";
 import { updatePageAfterAnyChange } from "../modules/updatePage.js";
@@ -40,6 +40,10 @@ updatepagination(mainObject,sizePerPage,currentPage);
 // 2.2 Event for changing sorting 
 // 2.3 Event for changing current page 
 // 2.4 Event for searching
+// 2.5 Event for adding new element
+// 2.6 Event for delete element in > update table content function because add event in every change to table
+// 2.7 Event for edit element   in > update table content function because add event in every change to table
+
 
 // 2.1 Event Handle for change size per page
 document.querySelector(".left-section select").addEventListener("change", () => {
@@ -117,7 +121,9 @@ document.querySelector(".searchInput").addEventListener("keyup", async(event) =>
 });
 
 
-// we should update studensData in every edit on db in add , edit , delete
+// 2.5 Event for add element
 document.querySelector(".add-std").addEventListener("click", (e)=>{
+  // open manage page
   window.location.href = `../Html/manageStudents.html`;
 });
+

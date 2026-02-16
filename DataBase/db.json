@@ -60,19 +60,6 @@
       ]
     },
     {
-      "id": "14",
-      "firstName": "Iorgos",
-      "lastName": "Haward",
-      "email": "ihawardd@mapy.cz",
-      "gender": "Male",
-      "phone": "1542708084",
-      "birthday": "18/02/2002",
-      "courses": [
-        4,
-        2
-      ]
-    },
-    {
       "id": "15",
       "firstName": "Adelheid",
       "lastName": "Goodread",
@@ -695,23 +682,19 @@
       ]
     },
     {
-      "id": "62",
-      "firstName": "Elia",
-      "lastName": "elia2",
-      "email": "elia3@gmail",
-      "gender": "Female",
-      "phone": "545646878976",
-      "birthday": "28/02/1984",
-      "courses": [
-        6,
-        11,
-        16
-      ]
-    },
-    {
       "id": "63",
       "firstName": "12",
       "lastName": "",
+      "email": "",
+      "gender": "",
+      "phone": "",
+      "birthday": "",
+      "courses": []
+    },
+    {
+      "id": "64",
+      "firstName": "gfs",
+      "lastName": "gdsf",
       "email": "",
       "gender": "",
       "phone": "",

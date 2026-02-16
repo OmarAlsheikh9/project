@@ -29,6 +29,7 @@ export function makeHeaderTable(headers,firstObject) {
   document.querySelector(`.typeSearch`).innerHTML=searchTypes;
 }
 export function updateTableContent(currentData,relatedObject,mainObjectName){
+  // This function update table content and add evnet hanlder to all delete and edits buttons
   // 1. if there is no currentData return 
   if(!currentData[0])
     return;
@@ -49,28 +50,27 @@ export function updateTableContent(currentData,relatedObject,mainObjectName){
   }
   // 3. update table page
   document.querySelector("table tbody").innerHTML=tableHtml;
+
   // Now we have table so we will add to all button event to make crud operation
-  // 4. target button for crud operations 
-  // for delete buttons
+  // 4. Event for delete element 
   const deleteButtons  = document.querySelectorAll(".deleteButton");
   for (let i = 0; i < deleteButtons.length; i++) {
-    
     deleteButtons[i].addEventListener("click", (e) => {
       const id = e.target.dataset.id; // id for seleted element
       deleteOneTarget(id.toString() , mainObjectName);
     });
   }
-  // for edit buttons
+
+  // 5. Event for edit element 
   const editButtons  = document.querySelectorAll(".editButton");
   for (let i = 0; i < editButtons.length; i++) {
-    
     editButtons[i].addEventListener("click", (e) => {
       const id = e.target.dataset.id;
-      console.log(id);
       window.location.href = `../Html/manage${mainObjectName}.html?id=${id}`;
-      //getOneTarget(id);
     });
   }
+
+
 }
 function makeList(array,relatedObject){
   let result='<select class="dropList">';
