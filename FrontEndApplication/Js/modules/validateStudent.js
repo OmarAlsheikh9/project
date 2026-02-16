@@ -1,12 +1,7 @@
-export function validateObject(object) {
+export function validateStudentObject(object) {
     if (!object.firstName || !object.lastName ||!object.gender  ||!object.birthday ){
         alert("Invalid Student Data , Please Fill the Form")
         throw new Error("Invalid Student Data , Please Fill the Form ");
-    }
-    if (!object.email || !validateEmail(object.email)){
-        alert("Invalid Email , Please Enter a Valid E-Mail")
-        throw new Error("A valid email is required.");
-
     }
     if (!object.email || !validateEmail(object.email)){
         alert("Invalid Email , Please Enter a Valid E-Mail")
@@ -26,6 +21,13 @@ export function validateObject(object) {
     if (object.courses && !Array.isArray(object.courses)){
         alert("You must Select at least one Course")
         throw new Error("Courses must be an array.");
+    }
+}
+
+export function validateCoursesObject(object) {
+    if (!object.id || !object.courseName ||!object.instructorId ){
+        alert("Invalid Course Data , Please Fill the Form")
+        throw new Error("Invalid Course Data , Please Fill the Form ");
     }
 }
   

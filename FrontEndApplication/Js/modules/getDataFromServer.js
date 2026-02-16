@@ -1,4 +1,4 @@
-import { validateObject } from "./validateStudent.js";
+import { validateStudentObject } from "./validateStudent.js";
 
 export async function getDataFromServer(url) {
   if (
@@ -65,7 +65,7 @@ export async function deleteOneTarget(id,targetObject){
       throw new Error(`Failed to delete. Status: ${response.status}`);
     }
 
-    alert(`Student with id ${id} deleted successfully`);
+    alert(`${targetObject} with id ${id} deleted successfully`);
 
   } catch (error) {
     console.error(`Delete error > ${error}`);
@@ -78,7 +78,12 @@ export async function editOneTarget(id, object,targetObject) {
     if (!object) throw new Error("Updated object is required");
 
     //back validation
-    validateObject(object);
+    if(targetObject === "students"){
+      validateStudentObject(object);
+    }
+    if(targetObject === "courses"){
+      validateCoursesObject(object);
+    }
 
     const res = await fetch(`http://localhost:3000/${targetObject}/${id}`, {
       method: "PUT",
@@ -104,7 +109,10 @@ export async function addOneTarget(object, targetObject) {
     if (!object) throw new Error("Object is required for creation");
 
     //back validation
-    validateObject(object);
+    if(targetObject === "students"){
+      validateStudentObject(object);
+    }
+
     
     const res = await fetch(`http://localhost:3000/${targetObject}`);
     const data = await res.json();

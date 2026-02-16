@@ -74,15 +74,13 @@ body {
   }
 
 
-  /* Styling for the label */
-.course-label {
+.data-label {
     display: flex;
     align-items: center;
     gap: 6px;
   }
   
-  /* Styling for checkboxes */
-  .courseCheck {
+  .dataCheck {
     width: auto;
     margin-right: 6px;
   }
