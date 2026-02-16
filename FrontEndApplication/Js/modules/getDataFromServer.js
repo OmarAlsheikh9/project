@@ -49,6 +49,7 @@ export async function getOneTarget(id , targetObject) {
 
 
 export async function deleteOneTarget(id,targetObject){
+  console.log(typeof id , id,targetObject);
   if (!id) {
     throw new Error("ID is required for deletion");
   }

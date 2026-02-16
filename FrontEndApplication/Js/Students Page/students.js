@@ -1,62 +1,61 @@
 // This Script split into two part (Start Point with inital vaules) + (Four event handler)
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Part 1 Start Point with inital vaules <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 // 1. Start Point 
 // 1.1 import all functions that students need
-import { getDataFromServer} from "../modules/getDataFromServer.js";
+import { getDataFromServer,getCurrentData} from "../modules/getDataFromServer.js";
 import {makeHeaderTable,updateTableContent,sortTableContent} from "../modules/dispalyTable.js";
 import { updatepagination,getNewPage} from "../modules/pagination.js";
 import { updatePageAfterAnyChange } from "../modules/updatePage.js";
 // 1.2 variables with default values
 
 let studentsURL = "http://localhost:3000/students",coursesURL = "http://localhost:3000/courses",
-studentsData = await getDataFromServer(studentsURL),
-coursesData = await getDataFromServer(coursesURL);
+mainObject = await getDataFromServer(studentsURL),mainObjectName="students",
+relatedObject = await getDataFromServer(coursesURL);
 
 let sizePerPage = 10,
-  currentStartStudents = studentsData.length > 0 ? 1 : 0,
-  currentEndStudents = currentStartStudents + sizePerPage - 1,
-  keysofStudents = Object.keys(studentsData[0]),
+  currentStart = mainObject.length > 0 ? 1 : 0,
+  currentEnd = currentStart + sizePerPage - 1,
+  keysofStudents = Object.keys(mainObject[0]),
   pagesortedBy = keysofStudents[0],
   typeofSort = "asc",
-  currentStudents = getCurrentData(studentsData,currentStartStudents,currentEndStudents),
+  currentData,
   currentPage=1;
-// start point
-makeHeaderTable(keysofStudents);
-updateTableContent(currentStudents,coursesData,"students");
-updateMessage();
-updatepagination();
-// events handler
-// 1.size of students
-document
-  .querySelector(".left-section select")
-  .addEventListener("change", () => {
-    sizePerPage = Number(document.querySelector(".left-section select").value);
-    currentEndStudents=currentStartStudents+sizePerPage-1;
-    currentStudents = getCurrentData(studentsData,currentStartStudents,currentEndStudents);
-    updateTableContent(currentStudents,coursesData,"students");
-    updateMessage();
-    // update paging
-    updatepagination();
-  });
-  currentStudents='',
-  currentPage = 1;
 // 1.3 start point default page
-makeHeaderTable(keysofStudents,studentsData[0]);
-currentStudents=updatePageAfterAnyChange(currentStudents,studentsData,pagesortedBy,typeofSort,coursesData,currentStartStudents,currentEndStudents);
-updatepagination(studentsData,sizePerPage,currentPage);
-// 2. Four events handler (event for change size per page , event for sorting , event for changing current page , event for searching)
-// 2.1 Event for change size per page
+makeHeaderTable(keysofStudents,mainObject[0]);
+currentData= updatePageAfterAnyChange(currentData,mainObject,pagesortedBy,typeofSort,relatedObject,currentStart,currentEnd,mainObjectName);
+updatepagination(mainObject,sizePerPage,currentPage);
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Part 2 Events Handle <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+
+
+// part 2 Events Handle Four events handler
+// 2.1 Event for changing size per page 
+// 2.2 Event for changing sorting 
+// 2.3 Event for changing current page 
+// 2.4 Event for searching
+
+// 2.1 Event Handle for change size per page
 document.querySelector(".left-section select").addEventListener("change", () => {
-  // 1. if user change size per page Update sizePerPage
+  // 1. user change size so we will get new one as number
   sizePerPage = Number(document.querySelector(".left-section select").value);
-  // 2. Update currentEndStudents because it will be changed but start still
-  currentEndStudents = currentStartStudents + sizePerPage - 1;
-  // 3. update page and current data
-  currentStudents = updatePageAfterAnyChange(currentStudents,studentsData,pagesortedBy,typeofSort,coursesData,currentStartStudents,currentEndStudents);
-  // 4. update pagination
-  updatepagination(studentsData,sizePerPage,currentPage);
+  // 2. only current end will be change but current start won't change
+  currentEnd=currentStart+sizePerPage-1;
+  // 3. because we change size we will change currentData and dipaly it with new pagination
+  currentData = updatePageAfterAnyChange(currentData,mainObject,pagesortedBy,typeofSort,relatedObject,currentStart,currentEnd,mainObjectName);
+  // 4. new pagination
+  updatepagination(mainObject,sizePerPage,currentPage);
 });
 
-// 2.2 Event for sort based on clicking on header
+
+
+// 2.2 Event for changing sort based on clicking on header
 document.querySelector("thead").addEventListener("click", (event) => {
   // 1. select which header we clicked
   const selectedTh = event.target.closest("th").classList[0];
@@ -66,13 +65,10 @@ document.querySelector("thead").addEventListener("click", (event) => {
     if (selectedTh === pagesortedBy) {
       typeofSort = typeofSort === "asc" ? "des" : "asc";
       // css style
-      document
-        .querySelector(`thead .${pagesortedBy} .upBtn`)
-        .classList.toggle("active");
-      document
-        .querySelector(`thead .${pagesortedBy} .downBtn`)
-        .classList.toggle("active");
-    } else {
+      document.querySelector(`thead .${pagesortedBy} .upBtn`).classList.toggle("active");
+      document.querySelector(`thead .${pagesortedBy} .downBtn`).classList.toggle("active");
+    } 
+    else {
       //2. if diffrent header remove active from current th then add to new one
       document.querySelector(`thead .${pagesortedBy} .upBtn`).classList.remove("active");
       document.querySelector(`thead .${pagesortedBy} .downBtn`).classList.remove("active");
@@ -81,62 +77,47 @@ document.querySelector("thead").addEventListener("click", (event) => {
       pagesortedBy = selectedTh;
       typeofSort = "asc";
     }
-    // 2. edit data
-    // first selected type of data we want to sort 
-    if(pagesortedBy==='id' || pagesortedBy==='phone')
-      sortArrayOfObjectsByNumbers(currentStudents,pagesortedBy,typeofSort);
-    else if(pagesortedBy==='birthday')
-      sortArrayOfObjectsByDate(currentStudents,pagesortedBy,typeofSort);
-    else
-      sortArrayOfObjectsByStrings(currentStudents,pagesortedBy,typeofSort);
-    // 3. update table content
-    updateTableContent(currentStudents,coursesData,"students");
     // 2. sort data
-    sortTableContent(currentStudents,pagesortedBy,typeofSort);
+    sortTableContent(currentData,pagesortedBy,typeofSort);
     // 3. update table content
-    updateTableContent(currentStudents, coursesData);
+    updateTableContent(currentData, relatedObject,mainObjectName);
   }
 });
+
+
 
 // 2.3 Event for pagination
 document.querySelector(".paginationContainer").addEventListener("click", (event) => {
   // 1. change css to make active new currentPage button and delete it from previous + select new currentPage
   const previosPage = currentPage;
-  currentPage = getNewPage(event.target.classList[0],currentPage,studentsData,sizePerPage);
+  currentPage = getNewPage(event.target.classList[0],currentPage,mainObject,sizePerPage);
   document.querySelector(`.page${previosPage}`).classList.remove("activePage");
   document.querySelector(`.page${currentPage}`).classList.add("activePage");
-}
-// event for pagination
-document.querySelector(".paginationContainer").addEventListener("click",event=>{
-  // css
-  const previosPage=currentPage;
-  currentPage=Number(event.target.classList[0][4]);
-  console.log(previosPage,currentPage);
-})
-
-
-document.querySelector(".add-std").addEventListener("click", (e)=>{
-  window.location.href = `../Html/manageStudents.html`;
-})
   // 2. currentPage updated so we must updata page
-  currentStartStudents = (currentPage - 1) * sizePerPage + 1; // new start
-  currentEndStudents = currentStartStudents + sizePerPage - 1; // new end
-  updatePageAfterAnyChange(currentStudents,studentsData,pagesortedBy,typeofSort,coursesData,currentStartStudents,currentEndStudents);
+  currentStart = (currentPage - 1) * sizePerPage + 1; // new start
+  currentEnd = currentStart + sizePerPage - 1; // new end
+  updatePageAfterAnyChange(currentData,mainObject,pagesortedBy,typeofSort,relatedObject,currentStart,currentEnd,mainObjectName);
 });
 
+  
 // 2.4 Event for search
 document.querySelector(".searchInput").addEventListener("keyup", async(event) => {
   let searchInputValue = (event.target.value).trim().toLowerCase();
   let typeSearch=document.querySelector('.typeSearch').value;
   // get updated data
-  studentsData = await getDataFromServer(studentsURL);
+  mainObject = await getDataFromServer(studentsURL);
   // filter data
-  studentsData = studentsData.filter(element=>{
+  mainObject = mainObject.filter(element=>{
     return element[typeSearch].toString().toLowerCase().includes(searchInputValue);
   });
-  currentStartStudents= studentsData.length > 0 ? 1 : 0;
-  currentEndStudents=currentStartStudents + sizePerPage - 1;
-  currentStudents=updatePageAfterAnyChange(currentStudents,studentsData,pagesortedBy,typeofSort,coursesData,currentStartStudents,currentEndStudents);
-  updatepagination(studentsData,sizePerPage,currentPage);
+  currentStart= mainObject.length > 0 ? 1 : 0;
+  currentEnd=currentStart + sizePerPage - 1;
+  currentData=updatePageAfterAnyChange(currentData,mainObject,pagesortedBy,typeofSort,relatedObject,currentStart,currentEnd,mainObjectName);
+  updatepagination(mainObject,sizePerPage,currentPage);
 });
+
+
 // we should update studensData in every edit on db in add , edit , delete
+document.querySelector(".add-std").addEventListener("click", (e)=>{
+  window.location.href = `../Html/manageStudents.html`;
+});
