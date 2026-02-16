@@ -17,6 +17,26 @@ let sizePerPage = 10,
   keysofStudents = Object.keys(studentsData[0]),
   pagesortedBy = keysofStudents[0],
   typeofSort = "asc",
+  currentStudents = getCurrentData(studentsData,currentStartStudents,currentEndStudents),
+  currentPage=1;
+// start point
+makeHeaderTable(keysofStudents);
+updateTableContent(currentStudents,coursesData,"students");
+updateMessage();
+updatepagination();
+// events handler
+// 1.size of students
+document
+  .querySelector(".left-section select")
+  .addEventListener("change", () => {
+    sizePerPage = Number(document.querySelector(".left-section select").value);
+    currentEndStudents=currentStartStudents+sizePerPage-1;
+    currentStudents = getCurrentData(studentsData,currentStartStudents,currentEndStudents);
+    updateTableContent(currentStudents,coursesData,"students");
+    updateMessage();
+    // update paging
+    updatepagination();
+  });
   currentStudents='',
   currentPage = 1;
 // 1.3 start point default page
@@ -61,6 +81,16 @@ document.querySelector("thead").addEventListener("click", (event) => {
       pagesortedBy = selectedTh;
       typeofSort = "asc";
     }
+    // 2. edit data
+    // first selected type of data we want to sort 
+    if(pagesortedBy==='id' || pagesortedBy==='phone')
+      sortArrayOfObjectsByNumbers(currentStudents,pagesortedBy,typeofSort);
+    else if(pagesortedBy==='birthday')
+      sortArrayOfObjectsByDate(currentStudents,pagesortedBy,typeofSort);
+    else
+      sortArrayOfObjectsByStrings(currentStudents,pagesortedBy,typeofSort);
+    // 3. update table content
+    updateTableContent(currentStudents,coursesData,"students");
     // 2. sort data
     sortTableContent(currentStudents,pagesortedBy,typeofSort);
     // 3. update table content
@@ -75,6 +105,19 @@ document.querySelector(".paginationContainer").addEventListener("click", (event)
   currentPage = getNewPage(event.target.classList[0],currentPage,studentsData,sizePerPage);
   document.querySelector(`.page${previosPage}`).classList.remove("activePage");
   document.querySelector(`.page${currentPage}`).classList.add("activePage");
+}
+// event for pagination
+document.querySelector(".paginationContainer").addEventListener("click",event=>{
+  // css
+  const previosPage=currentPage;
+  currentPage=Number(event.target.classList[0][4]);
+  console.log(previosPage,currentPage);
+})
+
+
+document.querySelector(".add-std").addEventListener("click", (e)=>{
+  window.location.href = `../Html/manageStudents.html`;
+})
   // 2. currentPage updated so we must updata page
   currentStartStudents = (currentPage - 1) * sizePerPage + 1; // new start
   currentEndStudents = currentStartStudents + sizePerPage - 1; // new end
