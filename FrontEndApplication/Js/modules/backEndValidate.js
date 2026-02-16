@@ -2,10 +2,6 @@ export function validateStudentObject(object) {
     if (!object.firstName || !object.lastName ||!object.gender  ||!object.birthday ){
         alert("Invalid Student Data , Please Fill the Form")
         throw new Error("Invalid Student Data , Please Fill the Form ");
-export function validateObject(object) {
-    if (!object.firstName || !object.lastName  || !object.salary || !object.phone ||! object.role ||!object.birthday ){
-        alert("Invalid Employee Data , Please Fill the Form")
-        throw new Error("Invalid Employee Data , Please Fill the Form ");
     }
     if (!object.email || !validateEmail(object.email)){
         alert("Invalid Email , Please Enter a Valid E-Mail")

@@ -1,5 +1,14 @@
-import { getDataFromServer, getOneTarget, editOneTarget ,addOneTarget} from "./getDataFromServer.js";
-import { validateEmail , validatePhone , validateBirthday } from "./validateStudent.js";
+import {
+  getDataFromServer,
+  getOneTarget,
+  editOneTarget,
+  addOneTarget,
+} from "./getDataFromServer.js";
+import {
+  validateEmail,
+  validatePhone,
+  validateBirthday,
+} from "./backEndValidate.js";
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
@@ -21,14 +30,14 @@ const coursesBox = document.getElementById("coursesBox");
 
 let currentObject = null;
 
-
 async function renderCoursesCheckboxes(selected = []) {
   coursesBox.innerHTML = "";
-  const courses = await getDataFromServer("http://localhost:3000/courses")
+  const courses = await getDataFromServer("http://localhost:3000/courses");
   // console.log(courses)
-  for (let i = 1 ; i <= 20; i++) { //  must start with 1 cuz the data in the array 1  or greater but in the response it is an array pf length 20 start with 0
+  for (let i = 1; i <= 20; i++) {
+    //  must start with 1 cuz the data in the array 1  or greater but in the response it is an array pf length 20 start with 0
     const label = document.createElement("label");
-    label.className = "data-label"; 
+    label.className = "data-label";
 
     const cb = document.createElement("input");
     cb.type = "checkbox";
@@ -59,10 +68,8 @@ function fillForm(student) {
   genderMale.checked = g === "Male";
   genderFemale.checked = g === "Female";
 
-  // courses 
-  const selected = Array.isArray(student.courses)
-      ? student.courses
-      : [];
+  // courses
+  const selected = Array.isArray(student.courses) ? student.courses : [];
 
   renderCoursesCheckboxes(selected.map(Number));
 }
@@ -72,7 +79,7 @@ function readForm() {
     document.querySelector("input[name='gender']:checked")?.value || "";
 
   const selectedCourses = Array.from(
-    document.querySelectorAll(".dataCheck:checked")
+    document.querySelectorAll(".dataCheck:checked"),
   ).map((cb) => Number(cb.value));
 
   //front validation
@@ -114,13 +121,12 @@ function readForm() {
   };
 }
 
-
 async function loadTargetForEdit() {
   try {
-    if (!id){
+    if (!id) {
       fillForm({});
       return;
-    } 
+    }
 
     const target = await getOneTarget(id, entity);
     if (!target) throw new Error("Record not found");
@@ -136,18 +142,18 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   try {
-    if(id){
+    if (id) {
       // console.log(id)
       const updated = readForm();
       const saved = await editOneTarget(id, updated, entity);
-  
+
       currentObject = saved;
-    }else{ // creating
+    } else {
+      // creating
       const newStd = readForm();
       const created = await addOneTarget(newStd, entity);
-  
-      currentObject = created;
 
+      currentObject = created;
     }
     window.location.href = `../../../FrontEndApplication/Html/studentsPage.html`;
   } catch (err) {

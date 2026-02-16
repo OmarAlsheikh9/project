@@ -1,5 +1,16 @@
-import { getDataFromServer, getOneTarget, editOneTarget ,addOneTarget} from "./getDataFromServer.js";
-import { validateEmail , validatePhone , validateBirthday,validateRole,validateSalary } from "./validateStudent.js";
+import {
+  getDataFromServer,
+  getOneTarget,
+  editOneTarget,
+  addOneTarget,
+} from "./getDataFromServer.js";
+import {
+  validateEmail,
+  validatePhone,
+  validateBirthday,
+  validateRole,
+  validateSalary,
+} from "./backEndValidate.js";
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
@@ -14,15 +25,11 @@ const elEmail = document.getElementById("email");
 
 const elSalary = document.getElementById("salary");
 
-
 const elPhone = document.getElementById("phone");
 const elBirthday = document.getElementById("birthday");
 const elRole = document.getElementById("role");
 
 let currentObject = null;
-
-
-
 
 function fillForm(employee) {
   elId.value = employee.id ?? "";
@@ -68,10 +75,9 @@ function readForm() {
     return null;
   }
 
-
   return {
     ...currentObject,
-    id:elId.value.trim(),
+    id: elId.value.trim(),
     firstName: elFirstName.value.trim(),
     lastName: elLastName.value.trim(),
     email: elEmail.value.trim(),
@@ -82,13 +88,12 @@ function readForm() {
   };
 }
 
-
 async function loadTargetForEdit() {
   try {
-    if (!id){
+    if (!id) {
       fillForm({});
       return;
-    } 
+    }
 
     const target = await getOneTarget(id, entity);
     if (!target) throw new Error("Record not found");
@@ -104,16 +109,16 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   try {
-    if(id){
+    if (id) {
       const updated = readForm();
       const saved = await editOneTarget(id, updated, entity);
       currentObject = saved;
-    }else{ // creating
+    } else {
+      // creating
       const newStd = readForm();
       const created = await addOneTarget(newStd, entity);
-  
-      currentObject = created;
 
+      currentObject = created;
     }
     window.location.href = `../../../FrontEndApplication/Html/employeesPage.html`;
   } catch (err) {
@@ -122,4 +127,3 @@ form.addEventListener("submit", async (e) => {
 });
 
 loadTargetForEdit();
-
