@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Courses System</title>
+    <link rel="stylesheet" href="../Styles/pageStyle.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <button class="add-std">Add New Course</button>
+      </div>
+      <div class="control">
+        <div class="left-section">
+          <select name="studentsNumber">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          <span>entries per page</span>
+        </div>
+        <div class="right-section">
+          <input type="text" name="searchValue" placeholder="Search" class="searchInput"/>
+          <span>Search By</span>
+          <select class="typeSearch"></select>
+        </div>
+        <div class="clear-float"></div>
+      </div>
+      <div class="table-section"><table></table></div>
+      <div class="pageControl">
+        <div class="message"></div>
+        <div class="paginationContainer"></div>
+        <div class="clear-float"></div>
+      </div>
+    </div>
+    <script src="../Js/courses Page/courses.js" type="module"></script>
+  </body>
+</html>

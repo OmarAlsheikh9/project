@@ -28,12 +28,12 @@ async function renderCoursesCheckboxes(selected = []) {
   // console.log(courses)
   for (let i = 1 ; i <= 20; i++) { //  must start with 1 cuz the data in the array 1  or greater but in the response it is an array pf length 20 start with 0
     const label = document.createElement("label");
-    label.className = "course-label"; 
+    label.className = "data-label"; 
 
     const cb = document.createElement("input");
     cb.type = "checkbox";
     cb.value = String(i);
-    cb.className = "courseCheck";
+    cb.className = "dataCheck";
 
     if (selected.includes(i)) cb.checked = true;
 
@@ -72,7 +72,7 @@ function readForm() {
     document.querySelector("input[name='gender']:checked")?.value || "";
 
   const selectedCourses = Array.from(
-    document.querySelectorAll(".courseCheck:checked")
+    document.querySelectorAll(".dataCheck:checked")
   ).map((cb) => Number(cb.value));
 
   //front validation
