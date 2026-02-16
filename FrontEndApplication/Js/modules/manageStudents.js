@@ -1,4 +1,5 @@
 import { getDataFromServer, getOneTarget, editOneTarget ,addOneTarget} from "./getDataFromServer.js";
+import { validateEmail , validatePhone , validateBirthday } from "./validateStudent.js";
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
@@ -27,9 +28,7 @@ async function renderCoursesCheckboxes(selected = []) {
   // console.log(courses)
   for (let i = 1 ; i <= 20; i++) { //  must start with 1 cuz the data in the array 1  or greater but in the response it is an array pf length 20 start with 0
     const label = document.createElement("label");
-    label.style.display = "flex";
-    label.style.alignItems = "center";
-    label.style.gap = "6px";
+    label.className = "course-label"; 
 
     const cb = document.createElement("input");
     cb.type = "checkbox";
@@ -76,6 +75,32 @@ function readForm() {
     document.querySelectorAll(".courseCheck:checked")
   ).map((cb) => Number(cb.value));
 
+  //front validation
+  if (!elFirstName.value.trim()) {
+    alert("First name is required.");
+    return null;
+  }
+  if (!elLastName.value.trim()) {
+    alert("Last name is required.");
+    return null;
+  }
+  if (!elEmail.value.trim() || !validateEmail(elEmail.value.trim())) {
+    alert("Please enter a valid email address.");
+    return null;
+  }
+  if (!elPhone.value.trim() || !validatePhone(elPhone.value.trim())) {
+    alert("Please enter a valid phone number.");
+    return null;
+  }
+  if (!elBirthday.value.trim() || !validateBirthday(elBirthday.value.trim())) {
+    alert("Please enter a valid Birthday Like this DD/MM/YYYY.");
+    return null;
+  }
+  if (selectedCourses.length === 0) {
+    alert("At least one course must be selected.");
+    return null;
+  }
+
   return {
     ...currentObject,
     // id:elId.value.trim(),
@@ -88,6 +113,7 @@ function readForm() {
     courses: selectedCourses,
   };
 }
+
 
 async function loadTargetForEdit() {
   try {
@@ -111,8 +137,7 @@ form.addEventListener("submit", async (e) => {
 
   try {
     if(id){
-      console.log(id)
-      
+      // console.log(id)
       const updated = readForm();
       const saved = await editOneTarget(id, updated, entity);
   

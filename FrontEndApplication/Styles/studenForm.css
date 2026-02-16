@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f7fa;
+    color: #333;
+  }
+
+  h1 {
+    text-align: center;
+    color: #4e73df;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+
+  td {
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  input, button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  input[type="radio"] {
+    width: auto;
+  }
+
+  input[type="email"], input[type="text"], input[type="date"] {
+    width: 100%;
+  }
+
+  input:disabled {
+    background-color: #f9f9f9;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  td input[type="radio"] {
+    margin-right: 8px;
+  }
+
+  #saveBtn {
+    background-color: #4e73df;
+    color: white;
+    cursor: pointer;
+    border: none;
+  }
+
+  #saveBtn:hover {
+    background-color: #2e59d9;
+  }
+
+  #coursesBox {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+
+  #coursesBox label {
+    font-size: 14px;
+  }
+
+
+  /* Styling for the label */
+.course-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  /* Styling for checkboxes */
+  .courseCheck {
+    width: auto;
+    margin-right: 6px;
+  }
+
+
+
+

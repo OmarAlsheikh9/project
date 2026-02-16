@@ -2,11 +2,17 @@
   font-family: Arial;
   box-sizing:border-box;
   margin: 0px;
+  padding: 0;
+}
+body {
+  background-color: #f4f7fa;
+  padding: 20px;
+  color: #333;
 }
 .container{
   margin: 0 auto;
   margin-top: 20px;
-  width: fit-content;
+  width: 90%;
 }
 .add-std {
   padding: 10px 20px;
@@ -23,6 +29,7 @@
 .add-std:hover {
   background-color: #45a049;
 }
+
 .left-section{
   float: left;
   font-size: 15px;
@@ -31,6 +38,7 @@
   float: right;
   margin-top: 5px;
 }
+
 .right-section input , .typeSearch{
   padding: 5px 10px;
   font-size: 16px;
@@ -51,24 +59,32 @@
 
 /* table */
 .table-section{
-  margin-top: 13px;
+  margin-top: 20px;
+  width: 100%;
 }
 table{
+  width: 100%;
   font-size: 17px;
+  border-collapse: collapse;
+  margin-top: 10px;
 }
-.table-section table th,td{
+.table-section table th,
+.table-section table td {
   text-align: left;
-  padding: 5px 2px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
 }
-/* table header */
-thead th{
+
+thead th {
   cursor: pointer;
-  width: 105px;
+  /* width: 105px; */
 }
-thead th:hover{
-  background-color: white;
+
+thead th:hover {
+  background-color: #f1f1f1;
   box-shadow: 1px 2px 0.5px rgba(0, 0, 0, 0.3);
 }
+
 .buttonContainer{
   font-size: 10px;
   color: lightgray;
@@ -93,38 +109,89 @@ thead th:hover{
   cursor: pointer;
   font-size: 15px;
 }
+
+.editButton:hover, .deleteButton:hover {
+  background-color: darkviolet;
+}
+
 /* droplist */
-.dropList{
-  width: 80px;
+.dropList {
+  width: 100%;
   font-size: 18px;
+  padding: 5px;
 }
-/* page control */
-.pageControl{
+/* Pagination Container */
+.pageControl {
   margin-top: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
 }
-/* message */
-.message{
+
+/* Pagination Message (showing entries) */
+.message {
   color: gray;
-  font-size: 18px;
+  font-size: 16px;
   float: left;
 }
-/* paginationContainer */
-.paginationContainer{
+
+/* Pagination Container */
+.paginationContainer {
   float: right;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
-.paginationContainer div{
-  float: left;
-  border: 1px solid gray;
-  padding: 5px 10px;
-  border-radius: 2px;
+
+.paginationContainer div {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
   cursor: pointer;
-  color: blue;
+  color: #007bff;
+  font-size: 16px;
+  background-color: #f8f9fa;
+  transition: background-color 0.3s ease;
 }
-.paginationContainer .firstPage ,.paginationContainer .lastPage{
-  background-color: lightgray;
-  color: black;
+
+.paginationContainer div:hover {
+  background-color: #e9ecef;
 }
-.paginationContainer .activePage{
+
+.paginationContainer .activePage {
+  background-color: #007bff;
   color: white;
-  background-color: skyblue;
+  font-weight: bold;
+}
+
+.paginationContainer .firstPage,
+.paginationContainer .lastPage {
+  background-color: #f1f1f1;
+  color: #007bff;
+}
+
+.paginationContainer .firstPage:hover,
+.paginationContainer .lastPage:hover {
+  background-color: #e9ecef;
+}
+
+.paginationContainer .disabled {
+  color: #c6c6c6;
+  cursor: not-allowed;
+}
+
+/* Page Navigation Arrow Styles */
+.paginationContainer .firstPage, 
+.paginationContainer .lastPage {
+  background-color: #f8f9fa;
+  color: #007bff;
+}
+
+.paginationContainer .firstPage:hover,
+.paginationContainer .lastPage:hover {
+  background-color: #e9ecef;
+}
+
+.clear-float {
+  clear: both;
 }
