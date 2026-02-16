@@ -1,3 +1,5 @@
+import { validateObject } from "./validateStudent.js";
+
 export async function getDataFromServer(url) {
   if (
     typeof url !== "string" ||
@@ -75,6 +77,9 @@ export async function editOneTarget(id, object,targetObject) {
     if (!id) throw new Error("ID is required");
     if (!object) throw new Error("Updated object is required");
 
+    //back validation
+    validateObject(object);
+
     const res = await fetch(`http://localhost:3000/${targetObject}/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -98,6 +103,9 @@ export async function addOneTarget(object, targetObject) {
   try {
     if (!object) throw new Error("Object is required for creation");
 
+    //back validation
+    validateObject(object);
+    
     const res = await fetch(`http://localhost:3000/${targetObject}`);
     const data = await res.json();
 
