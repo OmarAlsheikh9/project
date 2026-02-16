@@ -2,6 +2,10 @@ export function validateStudentObject(object) {
     if (!object.firstName || !object.lastName ||!object.gender  ||!object.birthday ){
         alert("Invalid Student Data , Please Fill the Form")
         throw new Error("Invalid Student Data , Please Fill the Form ");
+export function validateObject(object) {
+    if (!object.firstName || !object.lastName  || !object.salary || !object.phone ||! object.role ||!object.birthday ){
+        alert("Invalid Employee Data , Please Fill the Form")
+        throw new Error("Invalid Employee Data , Please Fill the Form ");
     }
     if (!object.email || !validateEmail(object.email)){
         alert("Invalid Email , Please Enter a Valid E-Mail")
@@ -18,9 +22,9 @@ export function validateStudentObject(object) {
         throw new Error("A valid email is required.");
 
     }
-    if (object.courses && !Array.isArray(object.courses)){
-        alert("You must Select at least one Course")
-        throw new Error("Courses must be an array.");
+    if (!object.role || !validateRole(object.role)){
+        alert("Employee must be Instructor or employee")
+        throw new Error("Employee must be Instructor or employee");
     }
 }
 
@@ -37,11 +41,18 @@ export function validateEmail(email) {
 }
 
 export function validatePhone(phone) {
-    const phonePattern = /^\d{11}$/; // it must be 11 digit phone numbers
-    return phonePattern.test(phone);
+    const vaild  = /^\d{9,12}$/;// phone only have digit 0 to 9 and its size between 9 to 12
+    return vaild.test(phone);
 }
-  
 export function validateBirthday(birthday) {
     const birthdayPattern = /^([0-2][0-9]|(3)[0-1])\/([0][1-9]|1[0-2])\/\d{4}$/; //  it must be DD/MM/YYYY format
     return birthdayPattern.test(birthday)
+}
+export function validateRole(input){
+    const vaild = /instructor|employee/;
+    console.log(vaild.test(input));
+    return vaild.test(input);
+}
+export function validateSalary(input){
+    return input[0] === '£' && !isNaN(Number(input.substring(1)));
 }

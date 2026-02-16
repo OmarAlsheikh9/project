@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Employees</title>
+  <link rel="stylesheet" href="../Styles/studenForm.css">
+</head>
+<body>
+  <h1>Manage Employees</h1>
+
+  <form id="editForm">
+    <table border="1" cellpadding="8" cellspacing="0">
+      <tr>
+        <td>id</td>
+        <td><input id="id" name="id" disabled /></td>
+      </tr>
+
+      <tr>
+        <td>firstName</td>
+        <td><input id="firstName" name="firstName" /></td>
+      </tr>
+
+      <tr>
+        <td>lastName</td>
+        <td><input id="lastName" name="lastName" /></td>
+      </tr>
+
+      <tr>
+        <td>email</td>
+        <td><input id="email" name="email" type="email" /></td>
+      </tr>
+
+      <tr>
+        <td>salary</td>
+        <td><input id="salary" name="salary" /></td>
+      </tr>
+
+      <tr>
+        <td>phone</td>
+        <td><input id="phone" name="phone" /></td>
+      </tr>
+
+      <tr>
+        <td>birthday</td>
+        <td><input id="birthday" name="birthday" placeholder="DD/MM/YYYY" /></td>
+      </tr>
+
+      <tr>
+        <td>role</td>
+        <td><input id="role" name="role" /></td>
+      </tr>
+
+    </table>
+
+    <div style="margin-top:12px; display:flex; gap:10px;">
+      <button id="saveBtn" type="submit">Save</button>
+    </div>
+  </form>
+
+  <script type="module" src="../Js/modules/manageEmployees.js"></script>
+</body>
+</html>

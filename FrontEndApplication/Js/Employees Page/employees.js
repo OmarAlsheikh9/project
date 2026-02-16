@@ -3,27 +3,27 @@
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Part 1 Start Point with inital vaules <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // 1. Start Point 
-// 1.1 import all functions that students need
+// 1.1 import all functions that employees need
 import { getDataFromServer} from "../modules/getDataFromServer.js";
 import {makeHeaderTable,updateTableContent,sortTableContent} from "../modules/dispalyTable.js";
 import { updatepagination,getNewPage} from "../modules/pagination.js";
 import { updatePageAfterAnyChange } from "../modules/updatePage.js";
 // 1.2 variables with default values
 
-let studentsURL = "http://localhost:3000/students",coursesURL = "http://localhost:3000/courses",
-mainObject = await getDataFromServer(studentsURL),mainObjectName="students",
-relatedObject = await getDataFromServer(coursesURL);
+let employeessURL = "http://localhost:3000/employees",
+mainObject = await getDataFromServer(employeessURL),mainObjectName="employees",
+relatedObject = '';
 
 let sizePerPage = 10,
   currentStart = mainObject.length > 0 ? 1 : 0,
   currentEnd = currentStart + sizePerPage - 1,
-  keysofStudents = Object.keys(mainObject[0]),
-  pagesortedBy = keysofStudents[0],
+  keysofEmployees = Object.keys(mainObject[0]),
+  pagesortedBy = keysofEmployees[0],
   typeofSort = "asc",
   currentData,
   currentPage=1;
 // 1.3 start point default page
-makeHeaderTable(keysofStudents,mainObject[0]);
+makeHeaderTable(keysofEmployees,mainObject[0]);
 currentData= updatePageAfterAnyChange(currentData,mainObject,pagesortedBy,typeofSort,relatedObject,currentStart,currentEnd,mainObjectName);
 updatepagination(mainObject,sizePerPage,currentPage);
 
@@ -109,7 +109,7 @@ document.querySelector(".searchInput").addEventListener("keyup", async(event) =>
   let searchInputValue = (event.target.value).trim().toLowerCase();
   let typeSearch=document.querySelector('.typeSearch').value;
   // get updated data
-  mainObject = await getDataFromServer(studentsURL);
+  mainObject = await getDataFromServer(employeessURL);
   // filter data
   mainObject = mainObject.filter(element=>{
     return element[typeSearch].toString().toLowerCase().includes(searchInputValue);
@@ -124,6 +124,5 @@ document.querySelector(".searchInput").addEventListener("keyup", async(event) =>
 // 2.5 Event for add element
 document.querySelector(".add-std").addEventListener("click", (e)=>{
   // open manage page
-  window.location.href = `../Html/manageStudents.html`;
+  window.location.href = `../Html/manageemployees.html`;
 });
-

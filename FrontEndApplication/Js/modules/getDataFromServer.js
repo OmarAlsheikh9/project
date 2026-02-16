@@ -36,7 +36,7 @@ export async function getOneTarget(id , targetObject) {
     const response = await fetch(`http://localhost:3000/${targetObject}/${id}`);
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch student. Status: ${response.status}`);
+      throw new Error(`Failed to fetch ${targetObject}. Status: ${response.status}`);
     }
 
     const data = await response.json();
@@ -44,14 +44,13 @@ export async function getOneTarget(id , targetObject) {
     return data;
 
   } catch (error) {
-    console.error(`Error fetching student > ${error}`);
+    console.error(`Error fetching ${targetObject} > ${error}`);
   }
 }
 
 
 
 export async function deleteOneTarget(id,targetObject){
-  console.log(typeof id , id,targetObject);
   if (!id) {
     throw new Error("ID is required for deletion");
   }
